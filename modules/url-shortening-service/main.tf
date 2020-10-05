@@ -1,19 +1,30 @@
-resource "aws_lb" "url_shortening_alb" {
+resource "aws_lb" "url_shortener_alb" {
   name               = var.alb_name
-  internal           = var.internal
+  internal           = var.alb_internal
   load_balancer_type = "application"
-  security_groups    = [var.alb_sg_id]
-  subnets            = [var.alb_subnets]
+  security_groups    = var.alb_sg_id
+  subnets            = var.alb_subnets
 
   enable_deletion_protection = true
 
-  access_logs {
-    bucket  = aws_s3_bucket.lb_logs.bucket
-    prefix  = "test-lb"
-    enabled = true
-  }
-
   tags = {
-    Environment = "production"
+    Environment = var.env
+    Project     = "unity_url_shortener"
   }
+}
+
+# resource "aws_kms_key" "a" {
+#   description = "KMS key 1"
+
+# }
+
+# resource "aws_kms_alias" "a" {
+#   name          = "alias/my-key-alias"
+#   target_key_id = aws_kms_key.a.key_id
+# }
+
+module "url_shortener_ecs_service" {
+  source  = "../ecs_service"
+  cluster = var.ecs_cluster
+  vpc_id  = var.vpc_id
 }
