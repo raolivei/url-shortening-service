@@ -2,8 +2,8 @@ resource "aws_lb" "url_shortener_alb" {
   name               = var.alb_name
   internal           = var.alb_internal
   load_balancer_type = "application"
-  security_groups    = var.alb_sg_id
-  subnets            = var.alb_subnets
+  security_groups    = var.alb_sg_id   # Optional
+  subnets            = var.alb_subnets # Optional
 
   enable_deletion_protection = true
 
