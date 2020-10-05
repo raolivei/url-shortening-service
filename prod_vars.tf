@@ -10,7 +10,7 @@ variable "short_url_domain" {
   description = "The DNS domain registered for the URL shortening service."
 }
 
-variable "ecs_cluster" {
+variable "existing_ecs_cluster" {
   description = "The ECS cluster to create the ECS service upon. If not specified, a new cluster will be created."
   default     = null
 }
