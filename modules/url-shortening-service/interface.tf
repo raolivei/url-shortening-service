@@ -1,12 +1,15 @@
-variable "env" {
-  type        = string
-  description = "The environment that the resource is being created into"
-  default     = "production"
+variable "region" {
+  description = "The AWS provider region to be used as main deployment environment."
 }
 
-variable "alb_name" {
+variable "environment" {
   type        = string
-  description = "The application load balancer name."
+  description = "The environment that the resource is being created into."
+}
+
+variable "name" {
+  type        = string
+  description = "The name to be used to identify the service."
 }
 
 variable "alb_sg_id" {
@@ -35,4 +38,22 @@ variable "ecs_cluster" {
 variable "vpc_id" {
   type        = string
   description = "The VPC ID to assign the ECS task to."
+}
+
+variable "front_end_image" {
+  type        = string
+  description = "The docker container image to be used for Django (Front-End) ECS task."
+  default     = ""
+}
+
+variable "redis_image" {
+  type        = string
+  description = "The docker container image to be used for Redis (caching) ECS task."
+  default     = ""
+}
+
+variable "db_image" {
+  type        = string
+  description = "The docker container image to be used for Postgres (database) ECS task."
+  default     = ""
 }

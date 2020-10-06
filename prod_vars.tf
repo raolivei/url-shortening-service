@@ -1,5 +1,11 @@
-variable "aws_provider" {
+variable "region" {
   description = "The AWS provider region to be used as main deployment environment."
+}
+
+variable "environment" {
+  type        = string
+  description = "The environment that the resource is being created into."
+  default     = "production"
 }
 
 variable "vpc_id" {
@@ -13,4 +19,9 @@ variable "short_url_domain" {
 variable "existing_ecs_cluster" {
   description = "The ECS cluster to create the ECS service upon. If not specified, a new cluster will be created."
   default     = null
+}
+
+variable "public_subnets" {
+  type        = list
+  description = "The public subnets to be used by the Application Load Balancer and ECS."
 }
