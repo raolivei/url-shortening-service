@@ -24,7 +24,23 @@ variable "name" {
 
 variable "db_image" {
   type        = string
-  description = "The docker container image to be used for Postgres (database) ECS task."
+  description = "The docker container image to be used for Redis (databse) ECS task."
+}
+
+variable "target_group_arn" {
+  type        = string
+  description = "The Target Group ARN to be attached to the load balancer."
+}
+
+variable "security_groups" {
+  type        = string
+  description = "The security group list to be included in the ecs service network configuration."
+}
+
+variable "alb_subnets" {
+  type        = list
+  description = "the subnets to be included in the application load balancer."
+  default     = null
 }
 
 variable "consul_url_shortener_db_username" {

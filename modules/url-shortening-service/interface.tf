@@ -37,7 +37,7 @@ variable "ecs_cluster" {
 
 variable "vpc_id" {
   type        = string
-  description = "The VPC ID to assign the ECS task to."
+  description = "The VPC ID to assign resources to."
 }
 
 variable "front_end_image" {
@@ -54,7 +54,7 @@ variable "redis_image" {
 
 variable "db_image" {
   type        = string
-  description = "The docker container image to be used for Postgres (database) ECS task."
+  description = "The docker container image to be used for Redis (database) ECS task."
   default     = ""
 }
 

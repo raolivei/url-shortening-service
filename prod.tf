@@ -4,21 +4,14 @@ module "ecs_cluster" {
 }
 
 module "url_shortening_service" {
-  source          = "./modules/url-shortening-service"
-  region          = var.region
-  environment     = var.environment
-  name            = "url-shortening"
-  front_end_image = ""
-  redis_image     = ""
-  db_image        = "longshin/postgres:13.0"
-  alb_internal    = false
-  ecs_cluster     = var.existing_ecs_cluster != null ? var.existing_ecs_cluster : module.ecs_cluster.ecs_cluster_id
-  vpc_id          = var.vpc_id
-  alb_subnets     = var.public_subnets
-}
-
-module "url_shortening_service_test" {
-  source           = "./modules/url-shortening-service-test"
+  source           = "./modules/url-shortening-service"
+  region           = var.region
+  environment      = var.environment
+  name             = "url-shortening"
   short_url_domain = var.short_url_domain
+  db_image         = "longshin/redis:6.0.8" # This is my personal public repo.
+  alb_internal     = false
+  ecs_cluster      = var.existing_ecs_cluster != null ? var.existing_ecs_cluster : module.ecs_cluster.ecs_cluster_id
+  vpc_id           = var.vpc_id
+  alb_subnets      = var.public_subnets
 }
-

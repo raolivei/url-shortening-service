@@ -1,9 +1,12 @@
 resource "aws_ecs_task_definition" "url_shortener_db" {
-  family = "service"
-  # task_role_arn 
-  # execution_role_arn 
-  # image = "longshn/postgres:13.0"
-  container_definitions = "${data.template_file.container_definition.rendered}"
+  family                   = var.task_name
+  task_role_arn            = aws_iam_role.url_shortening_task_role.arn
+  execution_role_arn       = aws_iam_role.url_shortening_execution_role.arn
+  container_definitions    = data.template_file.container_definition.rendered
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = var.cpu
+  memory                   = var.memory
 
   tags = {
     TFManaged   = true
@@ -13,7 +16,7 @@ resource "aws_ecs_task_definition" "url_shortener_db" {
 }
 
 data "template_file" "container_definition" {
-  template = file("${path.module}/templates/postgres-service.json.tpl")
+  template = file("${path.module}/templates/redis-service.json.tpl")
 
   vars = {
     region         = var.region
