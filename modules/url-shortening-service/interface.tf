@@ -57,3 +57,12 @@ variable "db_image" {
   description = "The docker container image to be used for Postgres (database) ECS task."
   default     = ""
 }
+
+variable "short_url_domain" {
+  type        = string
+  description = "The short URL for the domain that is going to host the service (e.g: 'mydomain.net')"
+}
+
+output "alb" {
+  value = aws_lb.url_shortener_alb
+}

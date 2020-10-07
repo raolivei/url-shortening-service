@@ -4,6 +4,7 @@
         "image": "${task_image}",
         "cpu": ${cpu},
         "memory": ${memory},
+        "networkMode": "awsvpc",
         "essential": true,
         "requiresCompatibilities": [
         "FARGATE"
